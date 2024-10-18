@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Comic Book</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+
+
+
+        body::before {
+          content: "";
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-image: url('https://images.pexels.com/photos/7768663/pexels-photo-7768663.jpeg?auto=compress&cs=tinysrgb&w=600');
+          background-size: cover;
+          background-position: center;
+          background-attachment: fixed;
+          filter: blur(5px);
+          z-index: -1;
+      }
+      body {
+          position: relative;
+      }
+        
+    </style> 
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold mb-6 text-slate-300 py-2 bg-red-700 text-center">Update Comic Book</h1>
+        <form action="/update/<%=book._id %> " class="max-w-lg mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" method="POST">
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
+                    Name
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" name="name" value="<%= book.name%>" type="text" placeholder="Comic book name">
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="author">
+                    Author Name
+                </label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="authorname" id="author" type="text" value="<%= book.authorname%>" placeholder="Author name">
+            </div>
+            <div class="mb-4 flex justify-between">
+                <div class="w-1/2 pr-2">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="pages">
+                        Pages
+                    </label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="pages" id="pages" type="number" value="<%= book.pages %>" placeholder="Number of pages">
+                </div>
+                <div class="w-1/2 pl-2">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="year">
+                        Year
+                    </label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="year" name="year" value="<%= book.year%>" type="number" placeholder="Publication year">
+                </div>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="condition">
+                    Condition
+                </label>
+                <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="condition" id="condition">
+                   
+                    <option <%= book.condition === 'New' ? 'selected' : '' %>>New</option>
+                    <option <%= book.condition === 'Like New' ? 'selected' : '' %>>Like New</option>
+                    <option  <%= book.condition === 'Very Good' ? 'selected' : '' %>>Very Good</option>
+                    <option  <%= book.condition === 'Good' ? 'selected' : '' %>>Good</option>
+                    <option  <%= book.condition === 'Fair' ? 'selected' : '' %>>Fair</option>
+                    <option  <%= book.condition === 'Poor' ? 'selected' : '' %>>Poor</option>
+                </select>
+            </div>
+            <div class="mb-4 flex justify-between">
+                <div class="w-1/2 pr-2">
+                    <label class="block text-gray-700 text-sm font-bold mb-2"  for="price">
+                        Price ($)
+                    </label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="price" name="price" value="<%= book.price%>" type="number" step="0.01" placeholder="Price">
+                </div>
+                <div class="w-1/2 pl-2">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="discount">
+                        Discount (%)
+                    </label>
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="discount" value="<%= book.discount%>" name="discount" type="number" step="0.1" placeholder="Discount percentage">
+                </div>
+            </div>
+            <div class="mb-6">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="description">
+                    Description
+                </label>
+                <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="description" name="description" value="<%= book.description%>" rows="4" placeholder="Comic book description"></textarea>
+            </div>
+            <div class="flex items-center justify-between">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" value="Submit" type="submit">
+                    Update Comic Book
+                </button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

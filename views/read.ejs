@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Books </title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+
+
+
+        body::before {
+          content: "";
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-image: url('https://images.pexels.com/photos/7768663/pexels-photo-7768663.jpeg?auto=compress&cs=tinysrgb&w=600');
+          background-size: cover;
+          background-position: center;
+          background-attachment: fixed;
+          filter: blur(5px);
+          z-index: -1;
+      }
+      body {
+          position: relative;
+      }
+        
+    </style> 
+</head>
+<body >
+<div class="w-full h-full p-10  text-white"> 
+    <a class="text-black text-md font-semibold  " href="/">Back to Home</a>
+    <h1 class="text-3xl mb-3 tracking-tighter"> All Books </h1>
+    <div class="users flex gap-3 flex-wrap ">
+        <%if (book.length> 0){ %> 
+
+            <% book.forEach(function(book){ %>
+                <div class="user w-72 p-4 rounded-lg bg-zinc-800 ">
+                    
+                   <h2 class="text-3xl font-bold mt-3 tracking-tighter"> <%= book.name %> </h2>
+                   <h5 class="text-zinc-300 text-2xl font-semibold"> Author: <%= book.authorname %></h5>
+                   <h5 class="text-xl font-semibold text-white font-mono"> Published In: <%= book.year %></h5>
+                   <h5  class="text-xl font-semibold text-white font-mono"> Price: 	&#8377;<%= book.price %></h5>
+                   <h5  class="text-xl font-semibold text-white font-mono"> Discount: &#8377;<%= book.discount %></h5>
+                   <h5  class="text-xl font-semibold text-white font-mono"> Pages: <%= book.pages %></h5>
+                   <h5  class="text-xl font-semibold text-white font-mono"> Condition: <%= book.condition %></h5>
+                   <p  class="text-xl font-semibold text-white font-mono"> Description: <%= book.description %> </p>
+                   <div class="flex gap-3 mt-10">
+                       <a href="/edit/<%= book._id%>" class="text-zinc-900 text-xl rounded-lg p-2 bg-slate-200">Edit Book </a>
+                       <a href="/delete/<%= book._id %>" class="text-red-500 text-xl rounded-lg p-2 bg-slate-200"> Delete Book </a>
+           
+                   </div>
+               </div>
+              <% }) %>
+            <% } else { %>
+                <h3 class="text-red-700 px-5 text-3xl"> No Books yet </h3>
+           <%  } %>
+</div>
+
+<div class="pagination mt-10 flex justify-center">
+    <% if (currentPage > 1) { %>
+        <a href="/read?page=<%= currentPage - 1 %>&limit=<%= limit %>" class="text-white bg-blue-500 p-2 rounded-lg mr-3">Previous</a>
+    <% } %>
+
+    <% for (let i = 1; i <= totalPages; i++) { %>
+        <a href="/read?page=<%= i %>&limit=<%= limit %>" 
+           class="text-white bg-gray-500 p-2 rounded-lg <%= currentPage === i ? 'bg-blue-700' : '' %>">
+           <%= i %>
+        </a>
+    <% } %>
+
+    <% if (currentPage < totalPages) { %>
+        <a href="/read?page=<%= currentPage + 1 %>&limit=<%= limit %>" class="text-white bg-blue-500 p-2 rounded-lg ml-3">Next</a>
+    <% } %>
+</div>
+ 
+
+
+
+
+
+
+
+</div>
+</body>
+</html>
